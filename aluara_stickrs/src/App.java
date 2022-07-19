@@ -25,10 +25,11 @@ public class App {
         
         //exibir e manipula os dados
         for (Map<String,String> filme : listDeFilmes) {
-           System.out.println("Title - " + filme.get("title"));
-           System.out.println("Image - " + filme.get("image"));
-           System.out.println("Imdb Ranting - " + filme.get("imDbRating"));
+           System.out.println("\u001b[37m \u001b[44m Title \u001b[m - " + filme.get("title"));
            System.out.println();
+           System.out.println("\u001b[37m \u001b[44m Image \u001b[m - " + filme.get("image"));
+           System.out.println("\u001b[37m \u001b[44m Imdb Ranting \u001b[m - " + filme.get("imDbRating"));
+           System.out.println("------------------------------------------------------------");
         }
     }
 }
