@@ -1,6 +1,8 @@
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -9,8 +11,8 @@ import javax.imageio.ImageIO;
 public class GeradoraDeFigurinha {
     public void cria() throws Exception{
         //leitura da imagem
-       
-        BufferedImage imagemOriginal = ImageIO.read(new File("aluara_stickrs/entrada/filme.jpg"));
+       InputStream inputStream = new FileInputStream(new File("aluara_stickrs/entrada/filme.jpg"));
+        BufferedImage imagemOriginal = ImageIO.read(inputStream);
 
         // cria nova imagem em memoria com transparencia e com tamanho novo
         int largura = imagemOriginal.getWidth();
