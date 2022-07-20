@@ -1,8 +1,8 @@
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -11,7 +11,8 @@ import javax.imageio.ImageIO;
 public class GeradoraDeFigurinha {
     public void cria() throws Exception{
         //leitura da imagem
-       InputStream inputStream = new FileInputStream(new File("aluara_stickrs/entrada/filme.jpg"));
+        //InputStream inputStream = new FileInputStream(new File("aluara_stickrs/entrada/filme.jpg"));
+        InputStream inputStream = new URL("https://imersao-java-apis.s3.amazonaws.com/MostPopularTVs_2.jpg").openStream();
         BufferedImage imagemOriginal = ImageIO.read(inputStream);
 
         // cria nova imagem em memoria com transparencia e com tamanho novo
@@ -29,7 +30,7 @@ public class GeradoraDeFigurinha {
         graphics.setFont(font);
 
         //escrever uma frase na nova imagem
-        graphics.drawString("Melhor", 500, novaAltura  -80);
+        graphics.drawString("segura o tchan", 100, novaAltura  -80);
         graphics.setColor(Color.GRAY);
 
         // escrever a nova imagem em um arquivo
@@ -42,6 +43,7 @@ public class GeradoraDeFigurinha {
         gerar.cria();
     } catch (Exception e) {
                e.printStackTrace();
+               System.out.println("Arquivo Não encontrado...");
     }
     }
 }
