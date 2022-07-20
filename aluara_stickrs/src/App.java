@@ -1,4 +1,6 @@
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -11,7 +13,8 @@ public class App {
                // fazer uma conection http e buscar os top 250
 
         //String url = "https://imdb-api.com/en/API/Top250Movies/k_0ojt0yvm";
-        String url = "https://api.mocki.io/v2/549a5d8b";
+        String api = "https://raw.githubusercontent.com/alura-cursos/imersao-java/api/TopMovies.json";
+        String url = api;
         URI uri = URI.create(url);
         HttpClient client = HttpClient.newHttpClient(); 
         HttpRequest request = HttpRequest.newBuilder(uri).GET().build();
@@ -24,12 +27,19 @@ public class App {
         List<Map<String, String>> listDeFilmes = parser.parse(body); 
         
         //exibir e manipula os dados
+        var geradora  = new GeradoraDeFigurinha();
         for (Map<String,String> filme : listDeFilmes) {
-           System.out.println("\u001b[37m \u001b[44m Title \u001b[m - " + filme.get("title"));
-           System.out.println();
-           System.out.println("\u001b[37m \u001b[44m Image \u001b[m - " + filme.get("image"));
-           System.out.println("\u001b[37m \u001b[44m Imdb Ranting \u001b[m - " + filme.get("imDbRating"));
-           System.out.println("------------------------------------------------------------");
+            
+        String urlImagem = filme.get("image");
+        String titulo = filme.get("title");
+
+        InputStream inputStream = new URL(urlImagem).openStream();
+        String nomeArquivo = titulo;
+
+        geradora.cria(inputStream, nomeArquivo);
+
+        System.out.println(titulo);
+        System.out.println();
         }
     }
 }

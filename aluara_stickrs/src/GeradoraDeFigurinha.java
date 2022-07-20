@@ -2,17 +2,16 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
-import java.net.URL;
 import java.awt.Color;
 import java.awt.Font;
 
 import javax.imageio.ImageIO;
 
 public class GeradoraDeFigurinha {
-    public void cria() throws Exception{
+    public void cria(InputStream inputStream, String nomeArquivo) throws Exception{
         //leitura da imagem
         //InputStream inputStream = new FileInputStream(new File("aluara_stickrs/entrada/filme.jpg"));
-        InputStream inputStream = new URL("https://imersao-java-apis.s3.amazonaws.com/MostPopularTVs_2.jpg").openStream();
+       // InputStream inputStream = new URL("https://imersao-java-apis.s3.amazonaws.com/MostPopularTVs_2.jpg").openStream();
         BufferedImage imagemOriginal = ImageIO.read(inputStream);
 
         // cria nova imagem em memoria com transparencia e com tamanho novo
@@ -30,20 +29,10 @@ public class GeradoraDeFigurinha {
         graphics.setFont(font);
 
         //escrever uma frase na nova imagem
-        graphics.drawString("segura o tchan", 100, novaAltura  -80);
+        graphics.drawString(nomeArquivo, 10, novaAltura  -80);
         graphics.setColor(Color.GRAY);
 
         // escrever a nova imagem em um arquivo
-        ImageIO.write(novaImagem, "png", new File("aluara_stickrs/saida/filme_novo.png"));
+        ImageIO.write(novaImagem, "png", new File("aluara_stickrs/saida/" + nomeArquivo + ".png"));
     }
-
-    public static void main(String[] args) {
-       var gerar =  new GeradoraDeFigurinha();
-       try {
-        gerar.cria();
-    } catch (Exception e) {
-               e.printStackTrace();
-               System.out.println("Arquivo Não encontrado...");
-    }
-    }
-}
+} 
